@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
+from typing import Union, List, Optional, Literal
+from discord.ui import Modal, TextInput
 
 from classes.applications import MyModal, GeneralButton
 
@@ -63,7 +65,7 @@ class Users(commands.Cog):
     ]
     
 async def setup(bot: commands.Bot) -> None:
-  TEST_GUILD = Test_Server_ID
+  TEST_GUILD = GUILD_ID_HERE
   #global sync
   #await bot.add_cog(Admins(bot))
   #Local sync

@@ -2,13 +2,13 @@
 import discord, asyncio
 from discord.ext import commands
 from discord import app_commands
-from classes.users import Users
 
 initial_extensions = [
+        'classes.menus',
         'classes.users'
         ]
 
-TEST_GUILD = Test_Server_ID
+TEST_GUILD = GUILD_ID_HERE
 
 #intents = discord.Intents.all()
 intents = discord.Intents(
@@ -234,7 +234,7 @@ class MyBot(commands.Bot):
     print(g)
 
     
-bot = MyBot(intents=intents, application_id=bot_ID)
+bot = MyBot(intents=intents, application_id=BOT_ID_HERE)
 
 ##############################
 ##                          ##
