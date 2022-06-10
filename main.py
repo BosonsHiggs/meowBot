@@ -8,7 +8,7 @@ initial_extensions = [
         'classes.users'
         ]
 
-TEST_GUILD = GUILD_ID_HERE
+TEST_GUILD = guild_id_here
 
 #intents = discord.Intents.all()
 intents = discord.Intents(
@@ -234,7 +234,7 @@ class MyBot(commands.Bot):
     print(g)
 
     
-bot = MyBot(intents=intents, application_id=BOT_ID_HERE)
+bot = MyBot(intents=intents, application_id=925120360200962140)
 
 ##############################
 ##                          ##

@@ -2,14 +2,13 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 
-from classes.applications import MyModal, GeneralButton
-
 class Menus(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
         self.ctx_menu = app_commands.ContextMenu(
             name='Cool Command Name',
             callback=self.hello_command,
+            guild_ids=[898335285719470080]
         )
         self.bot.tree.add_command(self.ctx_menu)
 
@@ -21,5 +20,4 @@ class Menus(commands.Cog):
         await interaction.response.send_message('hello...')
 
 async def setup(bot: commands.Bot) -> None:
-  TEST_GUILD = GUILD_ID_HERE
-  await bot.add_cog(Menus(bot), guilds=bot.get_guild(TEST_GUILD))
+  await bot.add_cog(Menus(bot))

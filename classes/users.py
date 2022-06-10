@@ -65,8 +65,4 @@ class Users(commands.Cog):
     ]
     
 async def setup(bot: commands.Bot) -> None:
-  TEST_GUILD = GUILD_ID_HERE
-  #global sync
-  #await bot.add_cog(Admins(bot))
-  #Local sync
-  await bot.add_cog(Users(bot), guilds=bot.get_guild(TEST_GUILD))
+  await bot.add_cog(Users(bot))
