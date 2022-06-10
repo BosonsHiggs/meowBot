@@ -4,11 +4,11 @@ from discord.ext import commands
 from discord import app_commands
 
 initial_extensions = [
-        'classes.menus',
-        'classes.users'
+        'classes.users',
+        'classes.menus'
         ]
 
-TEST_GUILD = GUILD_ID_HERE
+TEST_GUILD = PRIVATE_GUILD_ID_HERE
 
 #intents = discord.Intents.all()
 intents = discord.Intents(
@@ -42,7 +42,7 @@ intents = discord.Intents(
   ##############################
 class MyBot(commands.Bot):
   def __init__(self, *, intents: discord.Intents, application_id: int):
-    super().__init__(command_prefix="..", intents=intents, application_id=application_id)
+    super().__init__(command_prefix="?", intents=intents, application_id=application_id)
 
   ##############################
   ##                          ##
@@ -59,6 +59,7 @@ class MyBot(commands.Bot):
     #await self.tree.sync()
 
     ##Local sync
+    ##await self.tree.sync(guild=self.get_guild(TEST_GUILD))
     await self.tree.sync(guild=discord.Object(id=TEST_GUILD))
 
 
@@ -242,7 +243,7 @@ bot = MyBot(intents=intents, application_id=925120360200962140)
 ##                          ##
 ##############################
 
-async def main():
+async def main() -> None:
   async with bot:
     await bot.start("TOKEN")
 

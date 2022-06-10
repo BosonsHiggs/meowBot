@@ -4,7 +4,9 @@ from discord import app_commands
 from typing import Union, List, Optional, Literal
 from discord.ui import Modal, TextInput
 
-from classes.applications import MyModal, GeneralButton
+from classes.applications import MyModal, GeneralButton, DropdownView
+
+TEST_GUILD = PRIVATE_GUILD_ID_HERE
 
 class Users(commands.Cog):
   def __init__(self, bot: commands.Bot) -> None:
@@ -63,6 +65,17 @@ class Users(commands.Cog):
       app_commands.Choice(name=fruit, value=fruit)
       for fruit in fruits if current.lower() in fruit.lower()
     ]
-    
+  
+  @commands.hybrid_command()
+  async def colour(self, ctx: commands.Context) -> None:
+    """Sends a message with our dropdown containing colours"""
+    await ctx.defer()
+
+    # Create the view containing our dropdown
+    view = DropdownView()
+
+    # Sending a message containing our view
+    await ctx.send('Pick your favourite colour:', view=view)
+
 async def setup(bot: commands.Bot) -> None:
-  await bot.add_cog(Users(bot))
+  await bot.add_cog(Users(bot), guilds=bot.get_guild(TEST_GUILD))
