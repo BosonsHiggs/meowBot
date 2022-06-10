@@ -8,7 +8,7 @@ initial_extensions = [
         'classes.users'
         ]
 
-TEST_GUILD = guild_id_here
+TEST_GUILD = GUILD_ID_HERE
 
 #intents = discord.Intents.all()
 intents = discord.Intents(
@@ -59,7 +59,7 @@ class MyBot(commands.Bot):
     #await self.tree.sync()
 
     ##Local sync
-    await self.tree.sync(guild=self.get_guild(TEST_GUILD))
+    await self.tree.sync(guild=discord.Object(id=TEST_GUILD))
 
 
   ##############################

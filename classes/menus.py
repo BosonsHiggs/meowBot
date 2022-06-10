@@ -2,15 +2,16 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 
+TEST_GUILD = GUILD_ID_HERE
 class Menus(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
         self.ctx_menu = app_commands.ContextMenu(
             name='Cool Command Name',
             callback=self.hello_command,
-            guild_ids=[898335285719470080]
+            guild_ids=[TEST_GUILD]
         )
-        self.bot.tree.add_command(self.ctx_menu)
+        self.bot.tree.add_command(self.ctx_menu,  guild=discord.Object(id=TEST_GUILD))
 
     async def cog_unload(self) -> None:
         self.bot.tree.remove_command(self.ctx_menu.name, type=self.ctx_menu.type)
