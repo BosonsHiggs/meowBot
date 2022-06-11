@@ -69,12 +69,28 @@ class Users(commands.Cog):
   @commands.hybrid_command()
   async def colour(self, ctx: commands.Context) -> None:
     """Sends a message with our dropdown containing colours"""
-    await ctx.defer()
+    await ctx.defer(ephemeral=False)
 
-    # Create the view containing our dropdown
-    view = DropdownView()
+    placeholder = "Choose an option:"
+    min_values = 1
+    max_values = 3
+    response = "You chose option"
 
-    # Sending a message containing our view
+    select_cases = [
+      ('label1', 'description1', '🛠️'),
+      ('label2', 'description2', '🛡️'),
+      ('label3', 'description3', '😎'),
+      ('label4', 'description4', '💵')
+    ]
+
+    view = DropdownView(select_cases, 
+                        placeholder=placeholder, 
+                        min_values=min_values, 
+                        max_values=max_values, 
+                        response=response
+                        )
+
+     # Sending a message containing our view
     await ctx.send('Pick your favourite colour:', view=view)
 
 async def setup(bot: commands.Bot) -> None:

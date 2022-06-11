@@ -235,7 +235,7 @@ class MyBot(commands.Bot):
     print(g)
 
     
-bot = MyBot(intents=intents, application_id=925120360200962140)
+bot = MyBot(intents=intents, application_id=BOT_ID_HERE)
 
 ##############################
 ##                          ##

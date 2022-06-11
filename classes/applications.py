@@ -133,31 +133,44 @@ class GeneralButton(discord.ui.View):
 
 
 class Dropdown(discord.ui.Select):
-    def __init__(self):
+  def __init__(self, args, **kwargs):
+    response = kwargs.get('response')
+    placeholder = kwargs.get('placeholder') or "You didn't type the placeholder"
+    min_values = kwargs.get('min_values') or 1
+    max_values = kwargs.get('max_values') or 1
 
-        # Set the options that will be presented inside the dropdown
-        options = [
-            discord.SelectOption(label='Red', description='Your favourite colour is red', emoji='🟥'),
-            discord.SelectOption(label='Green', description='Your favourite colour is green', emoji='🟩'),
-            discord.SelectOption(label='Blue', description='Your favourite colour is blue', emoji='🟦'),
-        ]
+    self.response = response
+    # Set the options that will be presented inside the dropdown
 
-        # The placeholder is what will be shown when no option is chosen
-        # The min and max values indicate we can only pick one of the three options
-        # The options parameter defines the dropdown options. We defined this above
-        super().__init__(placeholder='Choose your favourite colour...', min_values=1, max_values=1, options=options)
+    options = [
+      discord.SelectOption(label=x, description=y, emoji=z) for (x, y, z) in args
+    ]
 
-    async def callback(self, interaction: discord.Interaction):
-        # Use the interaction object to send a response message containing
-        # the user's favourite colour or choice. The self object refers to the
-        # Select object, and the values attribute gets a list of the user's
-        # selected options. We only want the first one.
-        await interaction.response.send_message(f'Your favourite colour is {self.values[0]}')
+    # The placeholder is what will be shown when no option is chosen
+    # The min and max values indicate we can only pick one of the three options
+    # The options parameter defines the dropdown options. We defined this above
+    super().__init__(
+             placeholder=placeholder, 
+             min_values=min_values, 
+             max_values=max_values, 
+             options=options
+             )
+
+  async def callback(self, interaction: discord.Interaction):
+    # Use the interaction object to send a response message containing
+    # the user's favourite colour or choice. The self object refers to the
+    # Select object, and the values attribute gets a list of the user's
+    # selected options. We only want the first one.
+    await interaction.response.send_message(f'{self.response} {self.values[0]}')
 
 
 class DropdownView(discord.ui.View):
-    def __init__(self):
-        super().__init__()
+  def __init__(self, args, **kwargs):
+    super().__init__()
+    response = kwargs.get('response')
+    placeholder = kwargs.get('placeholder') or "You didn't type the placeholder"
+    min_values = kwargs.get('min_values') or 1
+    max_values = kwargs.get('max_values') or 1
 
-        # Adds the dropdown to our view object.
-        self.add_item(Dropdown())
+    # Adds the dropdown to our view object.
+    self.add_item(Dropdown(args, response=response, placeholder=placeholder, min_values=min_values, max_values=max_values))
